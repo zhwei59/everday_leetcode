@@ -20,3 +20,11 @@
 #     return self.count
 class Solution:
     def kSum(self, A, k, target):
+        n=len(A)
+        dp=[[0 for _ in range(target+1)] for _ in range (k+1)]
+        dp[0][0]=1
+        for c in A:
+            for i in range(k,0,-1):
+                for j in range(target,c-1,-1):
+                    dp[i][j]+=dp[i-1][j-c]
+        return dp[k][target]
