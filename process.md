@@ -471,6 +471,9 @@ i_1,i_2=i_2,res
 0，1，（0，1，2）{递归}
 dp[i]=for i in dp[i-1] +(k-1,k,k+1)
 set add
+89. k数和 
+用target作为动态规划的点，原始问题是[i][j]从i中选j个数的和等于target
+所以有dp[i][j][target]=dp[i][j-1][target-A[i]]
 
 
 ### 双序列型
