@@ -13,3 +13,4 @@ class Solution:
         for i in range(n,6*n+1):
             res.append((i,dp[n][i]))
         return res
+
