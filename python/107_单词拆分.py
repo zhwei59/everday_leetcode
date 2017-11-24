@@ -26,22 +26,21 @@ class Solution:
 
     """
     def wordBreak(self, s, dict):
-        n = len(s)
-        max_len = 0
+        # write your code here
+        n=len(s)
+        max_len=0
         for e in dict:
-            max_len = max(max_len, len(e))
-        dp = [False for __ in range(n + 1)]
-        dp[0] = True
-        for i in range(1, n + 1):
-            j = 1
-            while j <= i and j <= max_len:
-                if not dp[i - j]:
-                    j += 1
+            max_len=max(max_len,len(e))
+        dp=[False for __ in range(n+1) ]
+        dp[0]=True
+        for i in range(1,n+1):
+            j=1
+            while j<=i and j<=max_len:
+                if not dp[i-j]:
+                    j+=1
                     continue
-                if s[i - j:i] in dict:
-                    dp[i] = True
+                if s[i-j:i] in dict:
+                    dp[i]=True
                     break
-                j += 1
+                j+=1
         return dp[n]
-
-
