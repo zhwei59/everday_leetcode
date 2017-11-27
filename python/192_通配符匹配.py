@@ -6,24 +6,28 @@ class Solution:
     """
     def isMatch(self, s, p):
         # write your code here
-        if not s:
-            return not p
-        m=len(s)
-        n=len(p)
-        dp=[False for i in range(m+1)]
-        dp[0]=True
-        for j in range(1,n+1):
-            pre=dp[0]
-            dp[0]= dp[0] and p[j-1]=='*'
-            for i in range(1,m+1):
-                tmp=dp[i]
-                if p[j-1] !='*':
-                    dp[i]=pre and (s[i-1]==p[j-1] or p[j-1]=='?')
-                else :
-                    dp[i]=dp[i-1] or dp[i]
-                pre=tmp
-        return dp[m]
+        n = len(s)
+        m = len(p)
+        f = [[False] * (m + 1) for i in range(n + 1)]
+        f[0][0] = True
+
+        if n == 0 and p.count('*') == m:
+            return True
+
+        for i in range(0, n + 1):
+            for j in range(0, m + 1):
+                if i > 0 and j > 0:
+                    f[i][j] |= f[i-1][j-1] and (s[i-1] == p[j-1] or p[j - 1] in ['?', '*'])
+
+                if i > 0 and j > 0:
+                    f[i][j] |= f[i - 1][j] and p[j - 1] == '*'
+
+                if j > 0:
+                    f[i][j] |= f[i][j - 1] and p[j - 1] == '*'
+
+
+        return f[n][m]
 
 
 
-print Solution().isMatch('bbabacccbcbbcaaab','*a*b??b*b')
+print Solution().isMatch('bbabacccbcbbcaaab','vewb')
